@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "@clerk/nextjs": "^6.33.0",
+    "@prisma/client": "^6.16.2",
+    "@stripe/stripe-js": "^7.9.0",
+    "lucide-react": "^0.544.0",
+    "prisma": "^6.16.2",
+    "stripe": "^18.5.0",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.13",
+    "@types/node": "^24.5.2",
+    "@types/react": "^19.1.15",
+    "@types/react-dom": "^19.1.9",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.2"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  }
+}

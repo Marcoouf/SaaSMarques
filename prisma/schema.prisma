@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Territory {
+  FR
+  EU
+}
+
+enum JobStatus {
+  PENDING
+  RUNNING
+  DONE
+  ERROR
+}
+
+enum Source {
+  INPI
+  EUIPO
+  WIPO
+}
+
+enum HitRisk {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model User {
+  id        String      @id @default(cuid())
+  clerkId   String      @unique
+  email     String      @unique
+  name      String?
+  createdAt DateTime    @default(now())
+  jobs      SearchJob[]
+}
+
+model SearchJob {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  queryText   String
+  niceClasses Int[]     // ex: [9, 35]
+  territory   Territory
+  status      JobStatus @default(PENDING)
+  globalRisk  Float?    // ex: 0..1 (calculé plus tard)
+  resultJson  Json?     // JSON brut issu de l'IA (sprint 2)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  hits        Hit[]
+}
+
+model Hit {
+  id               String   @id @default(cuid())
+  jobId            String
+  job              SearchJob @relation(fields: [jobId], references: [id])
+  source           Source
+  markText         String
+  classes          Int[]
+  applicationNo    String?
+  statusLabel      String?  // Registered / Pending / etc.
+  similarityJson   Json?    // {lev, jaro, phonetic, semantic}
+  risk             HitRisk?
+  rationale        String?  // courte explication IA
+  createdAt        DateTime @default(now())
+
+  @@index([jobId])
+}
