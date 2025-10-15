@@ -65,6 +65,7 @@ model Hit {
   applicationNo    String?
   statusLabel      String?  // Registered / Pending / etc.
   similarityJson   Json?    // {lev, jaro, phonetic, semantic}
+  markEmbedding    Float[]  // embedding du signe (peut être vide si non calculé)
   risk             HitRisk?
   rationale        String?  // courte explication IA
   createdAt        DateTime @default(now())

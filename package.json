@@ -3,7 +3,11 @@
     "@clerk/nextjs": "^6.33.0",
     "@prisma/client": "^6.16.2",
     "@stripe/stripe-js": "^7.9.0",
+    "double-metaphone": "^2.0.1",
+    "fast-xml-parser": "^4.5.3",
+    "fastest-levenshtein": "^1.0.16",
     "lucide-react": "^0.544.0",
+    "openai": "^5.23.2",
     "prisma": "^6.16.2",
     "stripe": "^18.5.0",
     "zod": "^4.1.11"
@@ -16,6 +20,7 @@
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.13",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.2"
   },
   "scripts": {
@@ -23,5 +28,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
+  },
+  "overrides": {
+    "openai": {
+      "zod": "^4.1.11"
+    }
   }
 }
